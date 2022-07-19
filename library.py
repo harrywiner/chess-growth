@@ -84,3 +84,13 @@ def build_rating_frame(games, username):
                      parse_date(g.headers["UTCDate"])] 
                     for g in games]
     return pd.DataFrame(rating_times, columns=["Rating", "Date"])
+
+
+def build_rating_list(games, username):
+    """
+    @returns List[DateUTC,Rating]
+    """
+    return [[parse_date(g.headers["UTCDate"]),
+             int(g.headers["WhiteElo"] if g.headers["White"] == username else g.headers["BlackElo"])] 
+                    for g in games]
+    
